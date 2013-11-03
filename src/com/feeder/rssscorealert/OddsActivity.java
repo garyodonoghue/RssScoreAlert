@@ -32,11 +32,14 @@ public class OddsActivity extends Activity {
 	// then
 	private void getOddsData() {
 		extras = getIntent().getExtras();
-		homeOdds = extras.getFloat("HOME_ODDS");
-		awayOdds = extras.getFloat("AWAY_ODDS");
-		drawOdds = extras.getFloat("DRAW_ODDS");
+		if (extras != null) {
+			homeOdds = extras.getFloat("HOME_ODDS");
+			awayOdds = extras.getFloat("AWAY_ODDS");
+			drawOdds = extras.getFloat("DRAW_ODDS");
 
-		setUpList(homeOdds, awayOdds, drawOdds);
+			setUpList(homeOdds, awayOdds, drawOdds);
+
+		}
 	}
 
 	private void setUpList(float homeOdds, float awayOdds, float drawOdds) {
