@@ -153,6 +153,8 @@ public class MainActivity extends Activity {
 					}
 				}
 			}
+			intent = new Intent(this, OddsActivity.class);
+			startActivity(intent);
 		}
 	}
 
