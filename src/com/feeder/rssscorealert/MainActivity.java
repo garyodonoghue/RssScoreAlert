@@ -153,9 +153,14 @@ public class MainActivity extends Activity {
 					}
 				}
 			}
-			intent = new Intent(this, OddsActivity.class);
-			startActivity(intent);
 		}
+
+		// TODO Remove - Adding this is for testing puposes
+		intent = new Intent(this, OddsActivity.class);
+		intent.putExtra("HOME_ODDS", 2.0f);
+		intent.putExtra("AWAY_ODDS", 2.5f);
+		intent.putExtra("DRAW_ODDS", 3.0f);
+		startActivity(intent);
 	}
 
 	@Override

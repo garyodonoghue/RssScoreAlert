@@ -1,5 +1,8 @@
 package com.feeder.rssscorealert;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -44,18 +47,16 @@ public class OddsActivity extends Activity {
 
 	private void setUpList(float homeOdds, float awayOdds, float drawOdds) {
 
-		String[] oddsArr = new String[3];
-		oddsArr[0] = Float.toString(homeOdds);
-		oddsArr[1] = Float.toString(awayOdds);
-		oddsArr[2] = Float.toString(drawOdds);
+		List<String> listOdds = new ArrayList<String>();
+		listOdds.add(Float.toString(homeOdds));
+		listOdds.add(Float.toString(awayOdds));
+		listOdds.add(Float.toString(drawOdds));
+
+		arrayAdapter = new ArrayAdapter<String>(this, R.layout.list_row,
+				R.id.scores, listOdds);
 
 		listView = (ListView) findViewById(R.id.oddsList);
-
-		// TODO Test this to see if it sets up the list ok
-		arrayAdapter = new ArrayAdapter<String>(MainActivity.getAppContext(),
-				R.layout.list_row, R.id.oddsList, oddsArr);
 		listView.setAdapter((ListAdapter) arrayAdapter);
-
 	}
 
 	private void setUpCloseBtnListener() {
