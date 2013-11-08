@@ -156,9 +156,10 @@ public class AsynchTask extends AsyncTask<Void, Void, ArrayList<List<Object>>> {
 					matchOdds.setAwayWinOdds(Float.parseFloat(awayWinOdds));
 
 					Element DrawElement = (Element) choiceOdds.item(2);
-					String drawOdds = DrawElement.getAttribute("odd");
-					matchOdds.setDrawOdds(Float.parseFloat(drawOdds));
-
+					if (DrawElement != null) {
+						String drawOdds = DrawElement.getAttribute("odd");
+						matchOdds.setDrawOdds(Float.parseFloat(drawOdds));
+					}
 					match.setOdds(matchOdds);
 					matchList.add(match);
 				}

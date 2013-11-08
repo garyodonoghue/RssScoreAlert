@@ -3,6 +3,8 @@ package com.feeder.rssscorealert;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.example.games.basegameutils.BaseGameActivity;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,9 +16,9 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
-public class OddsActivity extends Activity {
+public class OddsActivity extends Activity {// BaseGameActivity implements
+											// View.OnClickListener {
 
 	Bundle extras;
 	private float homeOdds;
@@ -32,7 +34,9 @@ public class OddsActivity extends Activity {
 		setContentView(R.layout.activity_odds);
 		getOddsData();
 		setUpCloseBtnListener();
-		setUpCoinListener();
+		setUpCoinListener(); // not working
+		// findViewById(R.id.sign_in_button).setOnClickListener(this);
+		// findViewById(R.id.sign_out_button).setOnClickListener(this);
 	}
 
 	private void setUpCoinListener() {
@@ -42,8 +46,9 @@ public class OddsActivity extends Activity {
 				@Override
 				public void onClick(View v) {
 					betTotalVal += 5;
-					TextView betTotal = (TextView) findViewById(R.id.bet_total);
-					betTotal.setText("Total Bet Value: " + betTotalVal);
+					// TextView betTotal = (TextView)
+					// findViewById(R.id.bet_total);
+					// betTotal.setText("Total Bet Value: " + betTotalVal);
 				}
 			});
 		}
@@ -96,5 +101,32 @@ public class OddsActivity extends Activity {
 		getMenuInflater().inflate(R.menu.odds, menu);
 		return true;
 	}
+
+	// @Override
+	// public void onSignInFailed() {
+	// // TODO Auto-generated method stub
+	//
+	// }
+	//
+	// @Override
+	// public void onSignInSucceeded() {
+	// // TODO Auto-generated method stub
+	//
+	// }
+	//
+	// @Override
+	// public void onClick(View view) {
+	// // if (view.getId() == R.id.sign_in_button) {
+	// // // start the asynchronous sign in flow
+	// // beginUserInitiatedSignIn();
+	// // } else if (view.getId() == R.id.sign_out_button) {
+	// // // sign out.
+	// // signOut();
+	// //
+	// // // show sign-in button, hide the sign-out button
+	// // findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+	// // findViewById(R.id.sign_out_button).setVisibility(View.GONE);
+	// // }
+	// }
 
 }

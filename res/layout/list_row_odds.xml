@@ -3,8 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/list_selector"
-    android:orientation="horizontal"
-    android:padding="5dip" >
+    android:orientation="horizontal">
     <!-- ListRow Left side Thumbnail image -->
     <LinearLayout
         android:id="@+id/thumbnail"
@@ -12,7 +11,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_marginRight="5dip"
-        android:padding="3dip" >
+        android:padding="3dip" 
+        android:orientation="horizontal">
     </LinearLayout>
     <TextView
         android:id="@+id/odds_value"
