@@ -120,6 +120,8 @@ public class OddsActivity extends BaseGameActivity implements
 		if (view.getId() == R.id.sign_in_button) {
 			// start the asynchronous sign in flow
 			beginUserInitiatedSignIn();
+			findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
+
 		} else if (view.getId() == R.id.sign_out_button) {
 			// sign out.
 			signOut();
