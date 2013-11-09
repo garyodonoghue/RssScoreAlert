@@ -9,12 +9,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
+import com.feeder.rssscorealert.domain.Match;
 import com.google.example.games.basegameutils.BaseGameActivity;
 
 public class OddsActivity extends BaseGameActivity implements
@@ -27,19 +26,31 @@ public class OddsActivity extends BaseGameActivity implements
 	private Adapter arrayAdapter;
 	ListView listView;
 	private int betTotalVal = 0;
+	private static String desc;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_odds);
 		getOddsData();
-		setUpCloseBtnListener();
 		setUpCoinListener(); // not working
+		checkIfBetAlreadyApplied();
 		// findViewById(R.id.coin_btn).setOnClickListener(this);
 		findViewById(R.id.sign_in_button).setOnClickListener(this);
 		findViewById(R.id.sign_out_button).setOnClickListener(this);
 	}
 
+	private void checkIfBetAlreadyApplied() {
+		extras = getIntent().getExtras();
+		boolean betAleadyApplied = extras.getBoolean("BET_APPLIED_ALREADY");
+		if (betAleadyApplied) { // disable the apply bet button or do something
+								// to let the user know a bet already exists
+			findViewById(R.id.apply_btn).setVisibility(View.GONE);
+		}
+
+	}
+
+	// TODO Fix this
 	private void setUpCoinListener() {
 		ImageButton imageBtn = (ImageButton) findViewById(R.id.coin_btn);
 		if (imageBtn != null) {
@@ -64,6 +75,7 @@ public class OddsActivity extends BaseGameActivity implements
 			homeOdds = extras.getFloat("HOME_ODDS");
 			awayOdds = extras.getFloat("AWAY_ODDS");
 			drawOdds = extras.getFloat("DRAW_ODDS");
+			desc = extras.getString("MATCH_DESC");
 
 			setUpList(homeOdds, awayOdds, drawOdds);
 
@@ -85,17 +97,6 @@ public class OddsActivity extends BaseGameActivity implements
 		listView.setAdapter((ListAdapter) arrayAdapter);
 	}
 
-	private void setUpCloseBtnListener() {
-		Button close_button = (Button) findViewById(R.id.close_btn);
-		close_button.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			}
-		});
-
-	}
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -111,7 +112,8 @@ public class OddsActivity extends BaseGameActivity implements
 
 	@Override
 	public void onSignInSucceeded() {
-		// TODO Auto-generated method stub
+		findViewById(R.id.sign_in_button).setVisibility(View.GONE);
+		findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
 
 	}
 
@@ -120,7 +122,6 @@ public class OddsActivity extends BaseGameActivity implements
 		if (view.getId() == R.id.sign_in_button) {
 			// start the asynchronous sign in flow
 			beginUserInitiatedSignIn();
-			findViewById(R.id.sign_out_button).setVisibility(View.VISIBLE);
 
 		} else if (view.getId() == R.id.sign_out_button) {
 			// sign out.
@@ -129,6 +130,23 @@ public class OddsActivity extends BaseGameActivity implements
 			// show sign-in button, hide the sign-out button
 			findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
 			findViewById(R.id.sign_out_button).setVisibility(View.GONE);
+		}
+
+		else if (view.getId() == R.id.cancel_btn) {
+
+			finish(); // close button clicked, close activity
+
+		} else if (view.getId() == R.id.apply_btn) {
+			// apply button clicked, update user's bet total amount and update
+			// list row appearance
+			// set betApplied on match in listMatches
+			for (Object match : MainActivity.listMatches) {
+				Match clickedMatch = (Match) match;
+				if (desc.equals(clickedMatch.getDescription())) {
+					clickedMatch.setBetApplied(true); // bet applied, disable
+					// bet icons if opened again
+				}
+			}
 		}
 	}
 

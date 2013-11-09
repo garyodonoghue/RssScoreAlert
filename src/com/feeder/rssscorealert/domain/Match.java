@@ -6,6 +6,15 @@ public class Match {
 	Team homeTeam = new Team();
 	Team awayTeam = new Team();
 	String description;
+	boolean betApplied = false;
+
+	public boolean isBetApplied() {
+		return betApplied;
+	}
+
+	public void setBetApplied(boolean betApplied) {
+		this.betApplied = betApplied;
+	}
 
 	public String getDescription() {
 		return description;
