@@ -145,10 +145,6 @@ public class MainActivity extends Activity {
 							intent.putExtra("DRAW_ODDS", match.getOdds()
 									.getDrawOdds());
 							startActivity(intent);
-						} else {
-							Toast.makeText(getAppContext(),
-									"No odds found for this match",
-									Toast.LENGTH_SHORT).show();
 						}
 					}
 				}
