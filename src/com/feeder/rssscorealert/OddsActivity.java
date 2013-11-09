@@ -3,9 +3,6 @@ package com.feeder.rssscorealert;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.example.games.basegameutils.BaseGameActivity;
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -16,9 +13,12 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
-public class OddsActivity extends Activity {// BaseGameActivity implements
-											// View.OnClickListener {
+import com.google.example.games.basegameutils.BaseGameActivity;
+
+public class OddsActivity extends BaseGameActivity implements
+		View.OnClickListener {
 
 	Bundle extras;
 	private float homeOdds;
@@ -35,8 +35,9 @@ public class OddsActivity extends Activity {// BaseGameActivity implements
 		getOddsData();
 		setUpCloseBtnListener();
 		setUpCoinListener(); // not working
-		// findViewById(R.id.sign_in_button).setOnClickListener(this);
-		// findViewById(R.id.sign_out_button).setOnClickListener(this);
+		// findViewById(R.id.coin_btn).setOnClickListener(this);
+		findViewById(R.id.sign_in_button).setOnClickListener(this);
+		findViewById(R.id.sign_out_button).setOnClickListener(this);
 	}
 
 	private void setUpCoinListener() {
@@ -102,31 +103,31 @@ public class OddsActivity extends Activity {// BaseGameActivity implements
 		return true;
 	}
 
-	// @Override
-	// public void onSignInFailed() {
-	// // TODO Auto-generated method stub
-	//
-	// }
-	//
-	// @Override
-	// public void onSignInSucceeded() {
-	// // TODO Auto-generated method stub
-	//
-	// }
-	//
-	// @Override
-	// public void onClick(View view) {
-	// // if (view.getId() == R.id.sign_in_button) {
-	// // // start the asynchronous sign in flow
-	// // beginUserInitiatedSignIn();
-	// // } else if (view.getId() == R.id.sign_out_button) {
-	// // // sign out.
-	// // signOut();
-	// //
-	// // // show sign-in button, hide the sign-out button
-	// // findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
-	// // findViewById(R.id.sign_out_button).setVisibility(View.GONE);
-	// // }
-	// }
+	@Override
+	public void onSignInFailed() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onSignInSucceeded() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onClick(View view) {
+		if (view.getId() == R.id.sign_in_button) {
+			// start the asynchronous sign in flow
+			beginUserInitiatedSignIn();
+		} else if (view.getId() == R.id.sign_out_button) {
+			// sign out.
+			signOut();
+
+			// show sign-in button, hide the sign-out button
+			findViewById(R.id.sign_in_button).setVisibility(View.VISIBLE);
+			findViewById(R.id.sign_out_button).setVisibility(View.GONE);
+		}
+	}
 
 }

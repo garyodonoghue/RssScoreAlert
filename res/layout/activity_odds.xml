@@ -15,6 +15,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
+        android:onClick="onClick"
         android:text="OK" />
 
     <ListView
@@ -38,5 +39,11 @@
 	    android:layout_height="wrap_content"
 	    android:text="Sign Out" 
 	    android:visibility="gone" />
-
+	
+	<TextView
+            android:text="Bet Total: 0"
+            android:layout_toRightOf="@+id/sign_in_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bet_total" />
 </RelativeLayout>
