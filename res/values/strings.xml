@@ -6,5 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="refresh">Refresh Scores!</string>
     <string name="app_id">1025476940008</string>
+    <string name="achievement_off_the_mark">CgkI6KHBmewdEAIQAg</string>
+    <string name="leaderboard_points_earned">CgkI6KHBmewdEAIQAA</string>
 
 </resources>
