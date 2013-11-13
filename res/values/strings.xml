@@ -8,5 +8,16 @@
     <string name="app_id">1025476940008</string>
     <string name="achievement_off_the_mark">CgkI6KHBmewdEAIQAg</string>
     <string name="leaderboard_points_earned">CgkI6KHBmewdEAIQAA</string>
-
+    <string name="title_activity_home">HomeActivity</string>
+	
+	<string-array name="items">
+        <item>Sign In</item>
+        <item>View Points</item>
+        <item>Friends</item>
+        <item>Leaderboard</item>
+        <item>Sign Out</item>
+    </string-array>
+    
+	 <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>
