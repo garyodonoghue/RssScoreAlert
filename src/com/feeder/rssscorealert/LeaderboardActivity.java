@@ -1,5 +1,7 @@
 package com.feeder.rssscorealert;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.example.games.basegameutils.BaseGameActivity;
 import com.google.example.games.basegameutils.GameHelper;
 
@@ -18,11 +20,14 @@ public class LeaderboardActivity extends BaseGameActivity {
 
 	private void getLeaderboard() {
 
-		String LEADERBOARD_ID = getResources().getString(
-				R.string.leaderboard_points_earned);
-		startActivityForResult(
-				mGamesClient.getLeaderboardIntent(LEADERBOARD_ID),
-				REQUEST_LEADERBOARD);
+		int isGooglePlayServiceAvilable = GooglePlayServicesUtil
+				.isGooglePlayServicesAvailable(getApplicationContext());
+		if (isGooglePlayServiceAvilable == ConnectionResult.SUCCESS) {
+			beginUserInitiatedSignIn();
+		} else {
+			// GooglePlayServicesUtil.getErrorDialog(isGooglePlayServiceAvilable,
+			// MainMenu.this, REQUEST_DIALOG).show();
+		}
 
 	}
 
@@ -41,7 +46,10 @@ public class LeaderboardActivity extends BaseGameActivity {
 
 	@Override
 	public void onSignInSucceeded() {
-		// TODO Auto-generated method stub
+		String LEADERBOARD_ID = getResources().getString(
+				R.string.leaderboard_points_earned);
+		startActivityForResult(
+				getGamesClient().getLeaderboardIntent(LEADERBOARD_ID), 1);
 
 	}
 

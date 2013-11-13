@@ -13,6 +13,7 @@
 	<string-array name="items">
         <item>Sign In</item>
         <item>View Points</item>
+        <item>Matches</item>
         <item>Friends</item>
         <item>Leaderboard</item>
         <item>Sign Out</item>
