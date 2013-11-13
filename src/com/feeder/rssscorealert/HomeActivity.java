@@ -1,8 +1,9 @@
 package com.feeder.rssscorealert;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -97,6 +98,18 @@ public class HomeActivity extends Activity {
 				long id) {
 			Toast.makeText(HomeActivity.this, ((TextView) view).getText(),
 					Toast.LENGTH_LONG).show();
+
+			if (((TextView) view).getText().toString().compareTo("Matches") == 0) {
+				Intent matchesIntent = new Intent(HomeActivity.this,
+						MainActivity.class);
+				startActivity(matchesIntent);
+			} else if (((TextView) view).getText().toString()
+					.compareTo("Leaderboard") == 0) {
+				Intent leaderboardIntent = new Intent(HomeActivity.this,
+						LeaderboardActivity.class);
+				startActivity(leaderboardIntent);
+			}
+
 			drawerLayout.closeDrawer(drawerListView);
 
 		}
