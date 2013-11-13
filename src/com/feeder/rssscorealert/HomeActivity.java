@@ -1,5 +1,9 @@
 package com.feeder.rssscorealert;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.example.games.basegameutils.BaseGameActivity;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -16,7 +20,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class HomeActivity extends Activity {
+public class HomeActivity extends BaseGameActivity {
+
+	private boolean userViewLeaderboard = false;
+
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		drawerLayout.openDrawer(drawerListView);
+	}
 
 	private String[] drawerListViewItems;
 	private DrawerLayout drawerLayout;
@@ -96,8 +108,8 @@ public class HomeActivity extends Activity {
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			Toast.makeText(HomeActivity.this, ((TextView) view).getText(),
-					Toast.LENGTH_LONG).show();
+			// Toast.makeText(HomeActivity.this, ((TextView) view).getText(),
+			// Toast.LENGTH_LONG).show();
 
 			if (((TextView) view).getText().toString().compareTo("Matches") == 0) {
 				Intent matchesIntent = new Intent(HomeActivity.this,
@@ -105,13 +117,44 @@ public class HomeActivity extends Activity {
 				startActivity(matchesIntent);
 			} else if (((TextView) view).getText().toString()
 					.compareTo("Leaderboard") == 0) {
-				Intent leaderboardIntent = new Intent(HomeActivity.this,
-						LeaderboardActivity.class);
-				startActivity(leaderboardIntent);
+				getLeaderboard();
+				userViewLeaderboard = true;
+				onSignInSucceeded();
+				userViewLeaderboard = false;
 			}
 
 			drawerLayout.closeDrawer(drawerListView);
 
+		}
+	}
+
+	private void getLeaderboard() {
+
+		int isGooglePlayServiceAvilable = GooglePlayServicesUtil
+				.isGooglePlayServicesAvailable(getApplicationContext());
+		if (isGooglePlayServiceAvilable == ConnectionResult.SUCCESS) {
+			beginUserInitiatedSignIn();
+		} else {
+			// GooglePlayServicesUtil.getErrorDialog(isGooglePlayServiceAvilable,
+			// MainMenu.this, REQUEST_DIALOG).show();
+		}
+
+	}
+
+	@Override
+	public void onSignInFailed() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onSignInSucceeded() {
+		if (userViewLeaderboard) {
+			String LEADERBOARD_ID = getResources().getString(
+
+			R.string.leaderboard_points_earned);
+			startActivityForResult(
+					getGamesClient().getLeaderboardIntent(LEADERBOARD_ID), 1);
 		}
 	}
 
