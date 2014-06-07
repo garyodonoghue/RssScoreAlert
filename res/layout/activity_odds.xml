@@ -9,14 +9,14 @@
     tools:context=".OddsActivity" >
 
     <Button
-        android:id="@+id/close_btn"
+        android:id="@+id/apply_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/oddsList"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignRight="@+id/sign_in_button"
         android:onClick="onClick"
-        android:text="OK" />
+        android:text="Apply" />
 
     <ListView
         android:id="@+id/oddsList"
@@ -48,4 +48,16 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:id="@+id/bet_total" />
+
+	<Button
+	    android:id="@+id/cancel_btn"
+	    android:layout_width="100dp"
+	    android:layout_height="wrap_content"
+	    android:layout_alignBaseline="@+id/close_btn"
+	    android:layout_alignBottom="@+id/close_btn"
+	    android:layout_alignLeft="@+id/bet_total"
+	    android:layout_marginLeft="25dp"
+	    android:onClick="onClick"
+	    android:text="Cancel" />
+
 </RelativeLayout>

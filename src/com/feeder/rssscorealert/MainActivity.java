@@ -144,6 +144,10 @@ public class MainActivity extends Activity {
 									.getAwayWinOdds());
 							intent.putExtra("DRAW_ODDS", match.getOdds()
 									.getDrawOdds());
+							intent.putExtra("MATCH_DESC",
+									match.getDescription());
+							intent.putExtra("BET_APPLIED_ALREADY",
+									match.isBetApplied());
 							startActivity(intent);
 						}
 					}
